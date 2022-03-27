@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clean Water</title>
+    <link rel="shortcut icon" type="image/png" href="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png"/>
+    <!-- link to logo I created and uploaded to github -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png" width="45" height="45" class="d-inline-block align-top mr-2">
+      <a class="navbar-brand" href="/">Quick Clean Water</a>
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a type="button" href='/monitoryourwater' class="btn btn-primary text-white">Monitor Your Water</a>
+      <a type="button" href='/sendcontaminanttest' class="btn btn-primary text-white">Send Contaminant Quiz</a>
+      <a type="button" href= '/contaminantsinformation' class="btn btn-primary text-white">Contaminants Information</a>
+      <a type="button" href= '/usersurvey' class="btn btn-primary text-white">User Surveys</a>
+      <a type="button" href= '/profile' class="btn btn-primary text-white">Profile</a>
+    </div>
+    </nav>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head>
+
+<div class = "container-fluid mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-center text-uppercase mb-3"><b>Sign Up</b></h4>
+          <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-info btn-block">Sign Up</button>
+            <p class="text-center mt-3">Already have an account? <a href="/log-in/"><b>Log In</b></a></p></form>
+        </div>
+      </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</header>
+  <p style="font-size:20px" align="middle">&copy; Quick Clean Water</p>
+  </body>
+</html>

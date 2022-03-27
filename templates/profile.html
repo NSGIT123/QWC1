@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clean Water</title>
+    <link rel="shortcut icon" type="image/png" href="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png"/>
+    <!-- link to logo I created and uploaded to github -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png" width="45" height="45" class="d-inline-block align-top mr-2">
+      <a class="navbar-brand" href="/">Quick Clean Water</a>
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a type="button" href='/monitoryourwater' class="btn btn-primary text-white">Monitor Your Water</a>
+      <a type="button" href='/takecontaminanttest' class="btn btn-primary text-white">Send Contaminant Quiz</a>
+      <a type="button" href= '/contaminantsinformation' class="btn btn-primary text-white">Contaminants Information</a>
+      <a type="button" href= '/usersurvey' class="btn btn-primary text-white">User Surveys</a>
+      <a type="button" href= '/profile' class="btn btn-primary text-white">Profile</a>
+         <a type="button" href='/sign-out' class="btn btn-outline-dark ml-2">Sign Out</a>
+    </div>
+    </nav>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head>
+
+  <body> <br><br>
+           <center><div class="card" style="width: 30rem;">
+           <div class="card-body">
+            <div style="align:middle">
+                    <div class="text-center">
+                       <h4>{{request.user.get_full_name}}</h4>
+                        <p class="text-secondary">{{request.user.email}}</p>
+                    </div>
+                </div>
+           </div>
+           </div>
+            </div></center>
+
+    <div class="container bg-light mt-4 pt-3 pb-3">
+        <div class="row">
+            <div class="col-lg-6">
+                <b class="text-secondary text-dark" style="font-size:20px">Change Profile</b><br>
+                <div class="card bg-white mt-2 mb-5">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_form user_form %}
+                            <input type="hidden" name="action" value="update_profile">
+                            <button type="submit" class="btn btn-info">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <b class="text-secondary text-dark" style="font-size:20px">Change Password</b><br>
+                <div class="card bg-white mt-2 mb-5">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_form password_form %}
+                            <input type="hidden" name="action" value="update_password">
+                            <button type="submit" class="btn btn-info">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src = "https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.css">
+    <script>
+        function toast(message,type) {
+            bootoast.toast({
+                position:'leftBottom',
+                message,
+                type,
+            });
+        }
+
+        {% if messages %}
+
+        {% for message in messages %}
+        toast('{{message}}','{{message.tage}}');
+        {% endfor %}
+        {% endif %}
+          var stripe = Stripe('pk_test_51JBXTxDSX74Tf85uDinV6akCBI8zK601HxVwLvsVUSqNmmwiNx02axZJPhBdSrZzSLVOYzcaS9SvPMSKxmbCLh3L00SX561CZC');
+          var elements = stripe.elements();
+          var cardElement = elements.create('card');
+          cardElement.mount('#card-element');
+
+          var cardholderName = document.getElementById('cardholder-name');
+          var cardButton = document.getElementById('card-button');
+          var clientSecret = "{{ client_secret }}";
+
+          cardButton.addEventListener('click', function (ev) {
+            stripe.confirmCardSetup(
+                clientSecret,
+                {
+                    payment_method: {
+                        card: cardElement,
+                    },
+                }
+            ).then(function (result) {
+              if (result.error) {
+                toast(result.error.message, 'error');
+              } else {
+                toast('Payment method is added.', 'success');
+              }
+            });
+          });
+
+  </script>
+  <p style="font-size:20px" align="middle">&copy; Quick Clean Water</p>
+  </body>
+ </html>

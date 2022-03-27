@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clean Water</title>
+    <link rel="shortcut icon" type="image/png" href="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png"/>
+    <!-- link to logo I created and uploaded to github -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png" width="45" height="45" class="d-inline-block align-top mr-2">
+      <a class="navbar-brand" href="/">Quick Clean Water</a>
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a type="button" href='/monitoryourwater' class="btn btn-primary text-white">Monitor Your Water</a>
+      <a type="button" href='/takecontaminanttest' class="btn btn-primary text-white">Take Contaminant Quiz</a>
+      <a type="button" href= '/contaminantsinformation' class="btn btn-primary text-white">Contaminants Information</a>
+      <a type="button" href= '/usersurvey' class="btn btn-primary text-white">User Surveys</a>
+      <a type="button" href= '/profile' class="btn btn-primary text-white">Profile</a>
+    {% if not request.user.is_authenticated %}
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a type="button" href='/log-in' class="btn btn-outline-dark ml-2">Log-In</a>
+      </li>
+      <li class="nav-item">
+        <a type="button" href="/sign-up/" class="btn btn-outline-dark ml-2">Sign-Up</a>
+      </li>
+    </ul>
+    {% else %}
+      <a type="button" href='/sign-out' class="btn btn-outline-dark ml-2">Sign Out</a>
+    {% endif %}
+    </div>
+    </nav>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head> <br><br>
+<body>
+    <div class="card-group mr-5 ml-5">
+      <div class="card">
+        <img src="https://user-images.githubusercontent.com/76495035/142958287-de758c1d-ff8e-4b5c-9d8b-0f7b2e9014be.PNG" class="card-img-top">
+        <div class="card-body">
+          <a type="button" href='/monitoryourwater' class="btn btn-info text-white">Monitor Your Water</a><br><br>
+          <p class="card-text">Monitor the pH, turbidity, temperature, total dissolved solids, conductivity, and salinity of your water, and through our Machine Learning technology, know if your water is safe to drink or not.</p>
+          <div class="alert alert-primary ml-2 mr-2" role="alert">
+              Before clicking the button below make sure to...<br>
+              1. Connect your computer with your Quick Clean Water device using the provided USB.<br>
+              2. Insert your Quick Clean Water device into your water and wait for 2 1/2 minutes while readings are taken.<br>
+              3. You will be redirected to the Monitor Your Water page after this time.<br>
+            </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://user-images.githubusercontent.com/76495035/142958288-13197f0f-4957-481b-942a-1adc88fe6ac8.PNG" class="card-img-top">
+        <div class="card-body">
+          <a type="button" href='/takecontaminanttest' class="btn btn-info text-white">Take Contaminant Test</a><br><br>
+          <p class="card-text">If our system is reporting that your water is non-potable, take this contaminant quiz to narrow down the impurity in your water using Quick Clean Water's Machine Learning technology. Send the test via email to your community as well.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://user-images.githubusercontent.com/76495035/142958306-f9a79e2f-1af1-4a94-bca2-22d1a05ca15e.PNG" class="card-img-top">
+        <div class="card-body">
+          <a type="button" href='/contaminantsinformation' class="btn btn-info text-white">Contaminants Information</a><br><br>
+          <p class="card-text">Find out how 17 different water contaminants look in water, affect your health, get into your water, and are treated.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://user-images.githubusercontent.com/76495035/147510050-81a3adf1-73a7-4c54-8039-2edcb35aa385.png" class="card-img-top">
+        <div class="card-body">
+          <a type="button" href='/usersurvey' class="btn btn-info text-white">User Surveys</a><br><br>
+          <p class="card-text">We are constantly improving our Machine Learning technology to protect the water of millions. We would appreciate your help if you have received a formal lab test on your water, not a test from Quick Clean Water. Your support can help reduce the most pressing threats on Earth today. </p>
+        </div>
+      </div>
+    </div><br><br>
+    <p style="font-size:20px" align="middle">&copy; Quick Clean Water</p>
+</body>
+</html>

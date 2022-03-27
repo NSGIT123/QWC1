@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clean Water</title>
+    <link rel="shortcut icon" type="image/png" href="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png" width="45" height="45" class="d-inline-block align-top mr-2">
+      <a class="navbar-brand" href="/">Quick Clean Water</a>
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a type="button" href='/monitoryourwater' class="btn btn-primary text-white">Monitor Your Water</a>
+      <a type="button" href='/takecontaminanttest' class="btn btn-primary text-white">Take Contaminant Quiz</a>
+      <a type="button" href='/contaminantsinformation' class="btn btn-primary text-white">Contaminants Information</a>
+      <a type="button" href= '/usersurvey' class="btn btn-primary text-white">User Surveys</a>
+      <a type="button" href= '/profile' class="btn btn-primary text-white">Profile</a>
+      <a type="button" href='/sign-out' class="btn btn-outline-dark ml-2">Sign Out</a>
+    </div>
+    </nav>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head> <br><br>
+<body>
+  <div class="mr-5 ml-5" id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0 text-black">
+          <button class="btn btn-link" style="color:black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Algae
+          </button>
+        </h5>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is still, warm, not enclosed, has high pH levels, and frequently contains excess nutrients like nitrogen and phosphorus due to being in close proximity with a farm, finding algae is more likely.<br>
+          <b>Algae in Water</b><br>
+          The contamination of algae in water would result in either a green, red, brown, or blue color; earthy, algae-like odor or no odor; and moldy, earthy taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing algae include stomach pain; vomiting; diarrhea; headache; skin, eye, nose, or throat irritation; and/or neurological symptoms.<br>
+          <b>Next Steps</b><br>
+          Based on the depth and diameter of the well, add a specific amount of chlorine bleach to 11-19 liters of water from the well.<br>
+          Add it to the well for 12 hours and then turn on all faucets until the chlorine can no longer be smelt in the water. Contact a water treatment professional. <br><br>
+          <div class="row">
+              <div class="col-sm">
+                  <b>Well Depth of 9 Meter:</b><br>
+                  <table class="table" style="wdith:50%">
+                      <thead>
+                        <tr>
+                          <th scope="col">Diameter of Well (meters)</th>
+                          <th scope="col">Chlorine Bleach (liters)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>.6</td>
+                          <td>5</td>
+                        </tr>
+                        <tr>
+                          <td>.9</td>
+                          <td>11</td>
+                        </tr>
+                        <tr>
+                          <td>1.2</td>
+                          <td>20</td>
+                        </tr>
+                        <tr>
+                          <td>1.5</td>
+                          <td>31</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="col-sm">
+                  <b>Well Depth of 12 Meter:</b><br>
+                  <table class="table" style="wdith:50%">
+                      <thead>
+                        <tr>
+                          <th scope="col">Diameter of Well (meters)</th>
+                          <th scope="col">Chlorine Bleach (liters)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>.6</td>
+                          <td>7</td>
+                        </tr>
+                        <tr>
+                          <td>.9</td>
+                          <td>15</td>
+                        </tr>
+                        <tr>
+                          <td>1.2</td>
+                          <td>27</td>
+                        </tr>
+                        <tr>
+                          <td>1.5</td>
+                          <td>42</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="col-sm">
+                  <b>Well Depth of 15 Meter:</b><br>
+                  <table class="table" style="wdith:50%">
+                      <thead>
+                        <tr>
+                          <th scope="col">Diameter of Well (meters)</th>
+                          <th scope="col">Chlorine Bleach (liters)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>.6</td>
+                          <td>19</td>
+                        </tr>
+                        <tr>
+                          <td>.9</td>
+                          <td>19</td>
+                        </tr>
+                        <tr>
+                          <td>1.2</td>
+                          <td>33</td>
+                        </tr>
+                        <tr>
+                          <td>1.5</td>
+                          <td>52</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Ammonia
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to agricultural fertilizers and industrial waste near lakes and reservoirs, finding ammonia is more likely.<br>
+          <b>Ammonia in Water</b><br>
+          The contamination of ammonia in water would result in a yellow color; chemical-like odor; and moldy, earthy taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing ammonia include coughing; chest pain; wheezing; difficulty breathing; fever; dizziness; eye, ear, nose, or throat pain; swelling; nausea; vomiting; confusion; shock; and fainting.<br>
+          <b>Next Steps</b><br>
+          Boiling water can remove free ammonia. The consumption of ammonia does not result in a high number of health risks and is uncommon; therefore expensive filters are unnecessary until the ammonia leads to coliform bacteria where filters are needed for safety. Contact a water treatment professional. <br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Arsenic
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If lake or reservoir water is in proximity with mining operations and geothermal activity near lakes and reservoirs, finding arsenic is more likely. Arsenic can also leach into groundwater through natural rocks and soil.<br>
+          <b>Arsenic in Water</b><br>
+          The contamination of arsenic in water would result in a bronze color, no distinct odor, and no distinct taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing arsenic include thickening or discoloration of the skin; skin cancer; nausea; vomiting; diarrhea; numbness; depression; headache; tumors in the lungs, bladder, kidneys, and liver.<br>
+          <b>Next Steps</b><br>
+          Arsenic can be removed through ion exchange, membrane filtration, and iron and aluminum coagulation. Water containing arsenic should not be used for drinking or cooking but can be used for bathing and other purposes. Contact a water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingFour">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            Bacteria
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to livestock cesspools, chemical dumps, and farms, finding bacteria is more likely.<br>
+          <b>Bacteria in Water</b><br>
+          The contamination of bacteria in water would result in a cloudy/tinted color; earthy, algae-like odor; and earthy, moldy taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing bacteria include diarrhea, vomiting, fatigue, dizziness, and urinary tract problems. <br>
+          <b>Next Steps</b><br>
+          Bacteria can be removed using a reverse osmosis filter or other filtration methods. Contact a water treatment professional. <br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingFive">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            Clay, Silt, Sand
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to sediments in runoff or at the bottom of the well, finding clay, silt, or sand is more likely. <br>
+          <b>Clay, Silt, or Sand in Water</b><br>
+          The contamination of clay, silt, or sand in water would result in a brown or cloudy color; earthy, dirt-like odor; and earthy, sandy taste. <br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing clay, silt, or sand include diarrhea, vomiting, fatigue, dizziness, and urinary tract problems. <br>
+          <b>Next Steps</b><br>
+          Raising the pump can avoid the sediments on the bottom of the well. Well casing and seals can keep out runoff, and at home, centrifuge systems and filters can be utilized. Contact a water treatment professional. <br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingSix">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+            Copper
+          </button>
+        </h5>
+      </div>
+      <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is running through corroding copper pipes, finding copper is more likely.<br>
+          <b>Copper in Water</b><br>
+          The contamination of copper in water would result in a green or blue color, metallic odor, and metallic taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing copper include gastrointestinal distress, anemia, and liver and kidney damage.<br>
+          <b>Next Steps</b><br>
+          Replace pipes and contact a water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingSeven">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+            Disinfectants
+          </button>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to runoff from pools, gardens, or chemically cleaned areas, finding disinfectant is more likely.<br>
+          <b>Disinfectants in Water</b><br>
+          The contamination of disinfectants in water would result in a clear or cloudy color, chemical-like odor, and chemical-like taste.<br>
+          <b>Symptoms</b><br>
+          The back of the disinfectant bottle or box explains the symptoms of ingestion.<br>
+          <b>Next Steps</b><br>
+          Use a remove osmosis filter or drain the water until the smell of disinfectants no longer remains. Contact a water treatment professional. <br>
+        </div>
+      </div>
+     </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingEight">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+            Fluoride
+          </button>
+        </h5>
+      </div>
+      <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to municipal water and groundwater containing high amounts of leaching fluoride, finding fluoride is more likely.<br>
+          <b>Fluoride in Water</b><br>
+          The contamination of fluoride in water would result in no distinct difference in color, odor, or taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing fluoride include dental fluorosis.<br>
+          <b>Next Steps</b><br>
+          Use remove osmosis or other filtration methods.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingNine">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+            Gasoline/Petrol
+          </button>
+        </h5>
+      </div>
+      <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to gasoline spills or underground storage tank leaks through runoff, finding gasoline is more likely.<br>
+          <b>Gasoline/Petrol in Water</b><br>
+          The contamination of gasoline in water would result in no distinct difference in color, odor, or taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing gasoline include irritation in the eyes and respiratory tract, headaches, lightheadedness, dizziness, nausea, confusion, and liver damage.<br>
+          <b>Next Steps</b><br>
+          Water containing gasoline should not be used for drinking or cooking and exposure should be minimal while bathing. Contact a water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTen">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+            Hydrogen Sulfide
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to sulfur bacteria in the water heater, plumbing, water softener, or groundwater, finding hydrogen sulfide is more likely.<br>
+          <b>Hydrogen Sulfide in Water</b><br>
+          The contamination of hydrogen sulfide in water would result in a white, black, gray, reddish-brown, red, or brown color and a sulfur-life, rotten odor and taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing hydrogen sulfide in infants include dehydration and diarrhea. Over time, acclimation to hydrogen sulfide occurs.<br>
+          <b>Next Steps</b><br>
+          Hydrogen sulfide can be removed using a carbon or oxidizing media filtrate. Contact a water treatment professional. <br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingEleven">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+            Lead/Iron
+          </button>
+        </h5>
+      </div>
+      <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is running through corroding iron or lead, finding the heavy metals is more likely.<br>
+          <b>Lead or Iron in Water</b><br>
+          The contamination of lead or iron in water would result in a brown, yellow, orange, or red color and a metallic odor and taste.<br>
+          <b>Symptoms</b><br>
+          In children, symptoms of drinking water containing lead include damage to the central and peripheral nervous system, learning disabilities, shorter stature, impaired hearing, impaired function of blood cells, and anemia. In adults, symptoms include cardiovascular disease and damage to the kidneys and reproductive system. Symptoms of ingesting iron are skin infection; wrinkles; eczema; acne; diabetes; hemochromatosis; stomach problems; nausea; and damage to the liver, pancreas, and heart.<br>
+          <b>Next Steps</b><br>
+          Lead or iron can be removed using a filter and can be prevented by replacing plumbing. Contact a water treatment professional. <br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwelve">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+            Manganese
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to mining operations, industrial wastewater, and groundwater near leaching soil, finding manganese is more likely.<br>
+          <b>Manganese in Water</b><br>
+          The contamination of manganese in water would result in a black or dark brown color, gasoline-like odor, and metallic taste.<br>
+          <b>Symptoms</b><br>
+          Drinking water containing manganese mostly affects infants, the elderly, those who are malnutritioned, and those with liver disease. Particularly, the symptoms of drinking water containing manganese in infants include a change in behavior, lower IQ, speech and memory difficulties, and lack of movement control.<br>
+          <b>Next Steps</b><br>
+          Manganese can be removed using water softening, distillation, reverse osmosis filters, or cation exchange filters. Contact a water treatment professional. <br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThirteen">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+            Nitrates/Nitrites
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThirteen" class="collapse" aria-labelledby="headingThirteen" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to fertilized farms, septic system failures, or compost piles, finding nitrates or nitrites is more likely.<br>
+          <b>Nitrates or Nitrites in Water</b><br>
+          The contamination of nitrates or nitrites in water would result in no distinct color, odor, or taste.<br>
+          <b>Symptoms</b><br>
+          In babies under six months, drinking water containing nitrates or nitrites include methemoglobinemia or “blue baby syndrome”. Over time, ingestion of the contaminant leads to cancer.<br>
+          <b>Next Steps</b><br>
+          Nitrites or Nitrates can be removed using a cation exchange filter, water softening, distillation, or reverse osmosis filters. Contact a water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingFourteen">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
+            Potassium Permanganate
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFourteen" class="collapse" aria-labelledby="headingFourteen" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is locally treated using potassium permanganate, finding the chemical is more likely.<br>
+          <b>Potassium Permanganate in Water</b><br>
+          The contamination of potassium permanganate in water would result in a pink color, no distinct odor, and chemical-like taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing potassium permanganate include skin irritation.<br>
+          <b>Next Steps</b><br>
+          Contact a local water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingFifteen">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
+            Radioactive Elements (Radium, Radon, Uranium)
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFifteen" class="collapse" aria-labelledby="headingFifteen" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to granite, sandstone, or shale bedrock, finding radium, radon, and uranium is more likely.<br>
+          <b>Radioactive Elements in Water</b><br>
+          The contamination of radioactive elements in water would result in no distinct color, odor, or taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing radioactive elements include internal organ cancers, anemia, and damage to the immune system.<br>
+          <b>Next Steps</b><br>
+          Radioactive elements can be removed using an anion exchange or reverse osmosis filter, activated alumina, or distillation. Contact a water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingSixteen">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
+            Sodium
+          </button>
+        </h5>
+      </div>
+      <div id="collapseSixteen" class="collapse" aria-labelledby="headingSixteen" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to large mineral deposits and seawater sprays, finding sodium is more likely.<br>
+          <b>Sodium in Water</b><br>
+          The contamination of sodium in water would result in no distinct color or odor but a salty taste.<br>
+          <b>Symptoms</b><br>
+          Drinking water containing sodium would result in a high salt intake. Those with high blood pressure, cardiovascular disease, heart disease, kidney problems, or low-sodium diets, should avoid ingesting water containing sodium.<br>
+          <b>Next Steps</b><br>
+          Sodium can be removed using an ion exchange or reverse osmosis filter or distillation. Contact a water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingSeventeen">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
+            Zinc
+          </button>
+        </h5>
+      </div>
+      <div id="collapseSeventeen" class="collapse" aria-labelledby="headingSeventeen" data-parent="#accordion">
+        <div class="card-body">
+          <b>Sources of Contamination</b><br>
+          If water is exposed to steel and coal-powered station wastewater, zinc fertilizers, pipes coated with zinc, or groundwater near leaching soil, finding zinc is more likely.<br>
+          <b>Sodium in Water</b><br>
+          The contamination of zinc in water would result in a cloudy color or odor and no distinct odor or taste.<br>
+          <b>Symptoms</b><br>
+          The symptoms of drinking water containing zinc include stomach cramps, nausea, and vomiting.<br>
+          <b>Next Steps</b><br>
+          Zinc can be removed using a reverse osmosis filter or distillation. Contact a water treatment professional.<br>
+        </div>
+      </div>
+    </div>
+  </div><br><br>
+    <p style="font-size:20px" align="middle">&copy; Quick Clean Water</p>
+</body>
+</html>

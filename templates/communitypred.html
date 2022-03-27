@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clean Water</title>
+    <link rel="shortcut icon" type="image/png" href="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png"/>
+    <!-- link to logo I created and uploaded to github -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png" width="45" height="45" class="d-inline-block align-top mr-2">
+      <a class="navbar-brand" href="/">Quick Clean Water</a>
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a type="button" href='/monitoryourwater' class="btn btn-primary text-white">Monitor Your Water</a>
+      <a type="button" href='/takecontaminanttest' class="btn btn-primary text-white">Take Contaminant Quiz</a>
+      <a type="button" href= '/contaminantsinformation' class="btn btn-primary text-white">Contaminants Information</a>
+      <a type="button" href= '/usersurvey' class="btn btn-primary text-white">User Surveys</a>
+      <a type="button" href= '/profile' class="btn btn-primary text-white">Profile</a>
+    {% if not request.user.is_authenticated %}
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a type="button" href='/log-in' class="btn btn-outline-dark ml-2">Log-In</a>
+      </li>
+      <li class="nav-item">
+        <a type="button" href="/sign-up/" class="btn btn-outline-dark ml-2">Sign-Up</a>
+      </li>
+    </ul>
+    {% else %}
+      <a type="button" href='/sign-out' class="btn btn-outline-dark ml-2">Sign Out</a>
+    {% endif %}
+    </div>
+    </nav>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head> <br><br>
+<body>
+           <center><div class="card" style="width: 30rem;">
+           <div class="card-body">
+            <div style="align:middle">
+                    <div class="text-center">
+                        <h3>{{name_of_community}}</h3>
+                       <h4>{{request.user}}</h4>
+                        <p class="text-secondary">{{request.user.email}}</p>
+                    </div>
+                </div>
+           </div>
+           </div>
+            </div></center>
+    </div><br><br>
+    <div class="row">
+    <div class="col-sm-3">
+      <center><div class="col-sm-6">
+      <div class="card bg-light mb-3" style="max-width: 35rem;">
+         <div class="card-header" id="leaderboard" style="font-size: 20px;">Contaminants</div>
+            <ul class="list-group">
+              {% for preddict in preddict.keys %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{preddict}}
+              </li>
+            </ul>
+          {% endfor %}
+      </div></div></div></center>
+    <div class="col-sm-3">
+      <center><div class="col-sm-6">
+      <div class="card bg-light mb-3" style="max-width: 35rem;">
+         <div class="card-header" id="leaderboard" style="font-size: 20px;">Predictions</div>
+            <ul class="list-group">
+              {% for preddict in preddict.values %}
+                <span class="badge badge-primary badge-pill ml-5 mr-5 mt-3 mb-3">{{preddict}}</span>
+              </li>
+            </ul>
+          {% endfor %}
+      </div></div></div></center>
+
+      <div class="col-lg-4" style="margin-left:50px">
+                <div class="card bg-white mt-2 mb-5">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <p class="text-secondary text-dark" style="font-size:18px">Contaminant Quiz Results</p>
+                            <input type="text" class="form-control" name="pred" placeholder="Ex. Arsenic or Bacteria"><br>
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        </form>
+                    </div>
+                </div></div></div>
+    <p style="font-size:20px" align="middle">&copy; Quick Clean Water</p>
+</body>
+</html>

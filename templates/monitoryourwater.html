@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clean Water</title>
+    <link rel="shortcut icon" type="image/png" href="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png"/>
+    <!-- link to logo I created and uploaded to github -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png" width="45" height="45" class="d-inline-block align-top mr-2">
+      <a class="navbar-brand" href="/">Quick Clean Water</a>
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a type="button" href='/monitoryourwater' class="btn btn-primary text-white">Monitor Your Water</a>
+      <a type="button" href='/takecontaminanttest' class="btn btn-primary text-white">Take Contaminant Quiz</a>
+      <a type="button" href= '/contaminantsinformation' class="btn btn-primary text-white">Contaminants Information</a>
+      <a type="button" href= '/usersurvey' class="btn btn-primary text-white">User Surveys</a>
+      <a type="button" href= '/profile' class="btn btn-primary text-white">Profile</a>
+         <a type="button" href='/sign-out' class="btn btn-outline-dark ml-2">Sign Out</a>
+    </div>
+    </nav>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head> <br><br>
+<body>
+  <div class="alert alert-danger
+   ml-5 mr-5" role="alert">
+      {{error}}
+  </div>
+  <div class="row mr-5 ml-5">
+    <div class="col-sm">
+      <div class="card border-info mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-info">pH</div>
+        <div class="card-body text-dark">
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="{{pH}}" disabled>
+          <meter style="width:100%; height:2em" max= 14.0 min= 0.0 value="{{pH}}" high= 8.5 low= 6.5 optimum= 7></meter>
+        </div>
+        <div class="card-footer bg-transparent border-info">Water with a pH level between 6.5 and 8.5 is considered to be drinkable water. Anything below 6.5 is acidic, and anything above 8.5 is alkaline.</div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card border-info mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-info">Turbidity</div>
+        <div class="card-body text-dark">
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="{{turbidity}}" disabled>
+          <meter style="width:100%; height:2em" max= 50 min= 0.0 value="{{turbidity}}" high= 5.0 low= 0.0 optimum= 1></meter>
+        </div>
+        <div class="card-footer bg-transparent border-info">Water with a turbidity reading between 0 NTU and 5 NTU is considered to be drinkable water. Any reading above 5 is not acceptable.</div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card border-info mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-info">Temperature</div>
+        <div class="card-body text-dark">
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value = "{{ctemperature}} C"disabled><br>
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value = "{{ftemperature}} F"disabled>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card border-info mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-info">Total Dissolved Solids</div>
+        <div class="card-body text-dark">
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="{{tds}}" disabled>
+          <meter style="width:100%; height:2em" max= 2000.0 min= 0.0 value="{{tds}}" high= 500.0 low= 50.0 optimum= 300></meter>
+        </div>
+        <div class="card-footer bg-transparent border-info">Water with a TDS reading between 50 ppm and 500 ppm is considered to be drinkable water. Any reading below 50 ppm and above 500 ppm is not acceptable.</div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card border-info mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-info">Conductivity</div>
+        <div class="card-body text-dark">
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="{{conductivity}}" disabled>
+          <meter style="width:100%; height:2em" max= 2000.0 min= 0.0 value="{{conductivity}}" high= 1500.0 low= 0.0 optimum= 400></meter>
+        </div>
+        <div class="card-footer bg-transparent border-info">Water with a conductivity reading between 0 μS/cm and 1500 μS/cm is considered to be safe water. Any reading above 1500 μS/cm is not safe water.</div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card border-info mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-info">Salinity</div>
+        <div class="card-body text-dark">
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="{{salinity}}" disabled>
+          <meter style="width:100%; height:2em" max= 2000.0 min= 0.0 value="{{salinity}}" high= 900.0 low= 0.0 optimum= 600></meter>
+        </div>
+        <div class="card-footer bg-transparent border-info">Water with a conductivity reading between 0 mg/L and 900 mg/L is considered to be potable water. Any reading above 900 mg/L is not non-potable water.</div>
+      </div>
+    </div>
+    <div class="col-sm">
+       <div class="card border-info mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-info">Machine Learning Potability Prediction</div>
+          <div class="card-body text-info">
+              {% if quickoutput == 'NOT SAFE' %}
+                 <div class="alert alert-danger" role="alert">
+                     {{quickoutput}}
+                 </div>
+              {% else %}
+                 <div class="alert alert-info" role="alert">
+                     {{quickoutput}}
+                 </div>
+              {% endif %}
+              <div class="card-body text-info" style="font-size:18px">
+                  {{output}}
+              </div>
+          </div>
+       </div>
+    </div>
+  </div><br>
+  <p style="font-size:20px" align="middle">&copy; Quick Clean Water</p>
+</body>
+</html>
+
+

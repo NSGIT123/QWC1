@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clean Water</title>
+    <link rel="shortcut icon" type="image/png" href="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png"/>
+    <!-- link to logo I created and uploaded to github -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="https://user-images.githubusercontent.com/76495035/142946024-74f247c5-e70e-48f2-8df2-83aef40dc927.png" width="45" height="45" class="d-inline-block align-top mr-2">
+      <a class="navbar-brand" href="/">Quick Clean Water</a>
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a type="button" href='/monitoryourwater' class="btn btn-primary text-white">Monitor Your Water</a>
+      <a type="button" href='/takecontaminanttest' class="btn btn-primary text-white">Take Contaminant Quiz</a>
+      <a type="button" href= '/contaminantsinformation' class="btn btn-primary text-white">Contaminants Information</a>
+      <a type="button" href= '/usersurvey' class="btn btn-primary text-white">User Surveys</a>
+      <a type="button" href= '/profile' class="btn btn-primary text-white">Profile</a>
+         <a type="button" href='/sign-out' class="btn btn-outline-dark ml-2">Sign Out</a>
+    </div>
+    </nav>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head> <br><br>
+<body>
+    <div class="alert alert-primary ml-5 mr-5" role="alert">
+      Please Answer the Following Questions (all optional except last question) about your Water (only if you have taken a formal lab test)
+    </div>
+    <div class="row">
+        <div class="col-sm ml-5">
+            <div class="input-group mb-3">
+              <span class="input-group-text">pH</span>
+              <input type="text" id="ph" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Turbidity</span>
+              <input type="text" id="turbidity" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Temperature (Celsius)</span>
+              <input type="text" id="ctemperature" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Temperature (Fahrenheit)</span>
+              <input type="text" id="ftemperature" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Total Dissolved Solids</span>
+              <input type="text" id="tds" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Conductivity</span>
+              <input type="text" id="conductivity" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Salinity</span>
+              <input type="text" id="salinity" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="card border-info mb-3" style="max-width: 18rem;">
+                <div class="card-body text-info">
+                  <div class="card-body text-info" style="font-size:18px">
+                    Safe to Drink?
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="potability" id="yes">
+                        <label class="form-check-label" for="yes">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                         <input class="form-check-input" type="radio" name="potability" id="no" checked>
+                         <label class="form-check-label" for="no">
+                             No
+                         </label>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm ml-5">
+            <div class="card border-info mb-3" style="max-width: 18rem;">
+             <div class="card-header bg-transparent border-info">Submit</div>
+              <div class="card-body text-info">
+                  <div class="card-body text-info" style="font-size:18px">
+                   <form method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="action" value="potability">
+                      <input style="display:none" name="ph" id="phresult">
+                      <input style="display:none" name="turbidity" id="turbidityresult">
+                      <input style="display:none" name="ctemperature" id="ctemperatureresult">
+                      <input style="display:none" name="ftemperature" id="ftemperatureresult">
+                      <input style="display:none" name="tds" id="tdsresult">
+                      <input style="display:none" name="conductivity" id="conductivityresult">
+                      <input style="display:none" name="salinity" id="salinityresult">
+                      <input style="display:none" name="potability" id="potability">
+                      <button onclick="recordpotability()" class="btn btn-outline-info">Submit</button><br><br>
+                      Thank you for helping improve water quality for everyone. We appreciate your help.
+                   </form>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div><br>
+    <div class="alert alert-primary ml-5 mr-5" role="alert">
+      Please Answer the Following Questions (all required) about your Water (only if you have taken a formal lab test)
+    </div>
+        <div class="row ml-5">
+          <div class="col-sm">
+            <div class="card border-info mb-3" style="max-width: 18rem;">
+              <div class="card-header bg-transparent border-info">Odor</div>
+                  <div class="card-body text-info">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="odor" id="Algae-Like Earthy">
+                          <label class="form-check-label" for="Algae-Like Earthy">
+                            Algae-Like Earthy
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="odor" id="Chemical-Likeodor" checked>
+                          <label class="form-check-label" for="Chemical-Like">
+                            Chemical-Like
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="odor" id="Earthy/Dirt-Like">
+                          <label class="form-check-label" for="Earthy/Dirt-Like">
+                            Earthy/Dirt-Like
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="odor" id="Gasoline-Likeodor" checked>
+                          <label class="form-check-label" for="Gasoline-Like">
+                            Gasoline-Like
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="odor" id="Metallicodor">
+                          <label class="form-check-label" for="Metallic">
+                            Metallic
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="odor" id="Rotton Sulfur-Likeodor" checked>
+                          <label class="form-check-label" for="Rotton Sulfur-Like">
+                            Rotton Sulfur-Like
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="odor" id="Noneodor">
+                          <label class="form-check-label" for="None">
+                            None
+                          </label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+              <div class="card border-info mb-3" style="max-width: 18rem;">
+                  <div class="card-header bg-transparent border-info">Color</div>
+                    <div class="card-body text-info">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Black">
+                          <label class="form-check-label" for="Black">
+                            Black
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Blue" checked>
+                          <label class="form-check-label" for="Blue">
+                            Blue
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Bronze">
+                          <label class="form-check-label" for="Bronze">
+                            Bronze
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Brown" checked>
+                          <label class="form-check-label" for="Brown">
+                            Brown
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Brown/Cloudy">
+                          <label class="form-check-label" for="Brown/Cloudy">
+                            Brown/Cloudy
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Cloudy" checked>
+                          <label class="form-check-label" for="Cloudy">
+                            Cloudy
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Dark Brown">
+                          <label class="form-check-label" for="Dark Brown">
+                            Dark Brown
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Gray" checked>
+                          <label class="form-check-label" for="Gray">
+                            Gray
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Green">
+                          <label class="form-check-label" for="Green">
+                            Green
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Orange" checked>
+                          <label class="form-check-label" for="Orange">
+                            Orange
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Pink">
+                          <label class="form-check-label" for="Pink">
+                            Pink
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Rainbow/Colorful" checked>
+                          <label class="form-check-label" for="Rainbow/Colorful">
+                            Rainbow/Colorful
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Red">
+                          <label class="form-check-label" for="Red">
+                            Red
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Reddish Brown" checked>
+                          <label class="form-check-label" for="Reddish Brown">
+                            Reddish Brown
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="White">
+                          <label class="form-check-label" for="White">
+                            White
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Yellow">
+                          <label class="form-check-label" for="Yellow">
+                            Yellow
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="color" id="Nonecolor" checked>
+                          <label class="form-check-label" for="None">
+                            None
+                          </label>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm">
+              <div class="card border-info mb-3" style="max-width: 18rem;">
+                  <div class="card-header bg-transparent border-info">Taste</div>
+                    <div class="card-body text-info">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="Chemical-Like">
+                          <label class="form-check-label" for="Chemical-Like">
+                            Chemical-Like
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="Earthy/Sandy" checked>
+                          <label class="form-check-label" for="Earthy/Sandy">
+                            Earthy/Sandy
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="Gasoline-Like">
+                          <label class="form-check-label" for="Gasoline-Like">
+                            Gasoline-Like
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="Metallic">
+                          <label class="form-check-label" for="Metallic">
+                            Metallic
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="Moldy Earthy" checked>
+                          <label class="form-check-label" for="Moldy Earthy">
+                            Moldy Earthy
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="Rotton Sulfur-Like">
+                          <label class="form-check-label" for="Rotton Sulfur-Like">
+                            Rotton Sulfur-Like
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="Salty">
+                          <label class="form-check-label" for="Salty">
+                            Salty
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="taste" id="None" checked>
+                          <label class="form-check-label" for="None">
+                            None
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+        <div class="col-sm">
+              <div class="card border-info mb-3" style="max-width: 18rem;">
+                  <div class="card-header bg-transparent border-info">Contaminant</div>
+                    <div class="card-body text-info">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Algae">
+                          <label class="form-check-label" for="Algae">
+                            Algae
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Ammonia" checked>
+                          <label class="form-check-label" for="Ammonia">
+                            Ammonia
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Arsenic">
+                          <label class="form-check-label" for="Arsenic">
+                            Arsenic
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Clay, Silt, Sand">
+                          <label class="form-check-label" for="Clay, Silt, Sand">
+                            Clay, Silt, Sand
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Bacteria" checked>
+                          <label class="form-check-label" for="Bacteria">
+                            Bacteria
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Copper">
+                          <label class="form-check-label" for="Copper">
+                            Copper
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Disinfectants">
+                          <label class="form-check-label" for="Disinfectants">
+                            Disinfectants
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Fluoride" checked>
+                          <label class="form-check-label" for="Fluoride">
+                            Fluoride
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Gasoline/Petrol" checked>
+                          <label class="form-check-label" for="Gasoline/Petrol">
+                            Gasoline/Petrol
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Hydrogen Sulfide">
+                          <label class="form-check-label" for="Hydrogen Sulfide">
+                            Hydrogen Sulfide
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Lead/Iron">
+                          <label class="form-check-label" for="Lead/Iron">
+                            Lead/Iron
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Manganese" checked>
+                          <label class="form-check-label" for="Manganese">
+                            Manganese
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Nitrates/Nitrites" checked>
+                          <label class="form-check-label" for="Nitrates/Nitrites">
+                            Nitrates/Nitrites
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Potassium Permanganate">
+                          <label class="form-check-label" for="Potassium Permanganate">
+                            Potassium Permanganate
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Radioactive Elements">
+                          <label class="form-check-label" for="Radioactive Elements">
+                            Radioactive Elements
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Sodium" checked>
+                          <label class="form-check-label" for="Sodium">
+                            Sodium
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contaminant" id="Zinc" checked>
+                          <label class="form-check-label" for="Zinc">
+                            Zinc
+                          </label>
+                      </div>
+                  </div>
+              </div>
+
+        </div>
+        <div class="col-sm">
+            <div class="card border-info mb-3" style="max-width: 18rem;">
+             <div class="card-header bg-transparent border-info">Submit</div>
+              <div class="card-body text-info">
+                  <div class="card-body text-info" style="font-size:18px">
+                   <form method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="action" value="contaminant">
+                      <input style="display:none" name="odor" id="odor">
+                      <input style="display:none" name="color" id="color">
+                      <input style="display:none" name="taste" id="taste">
+                      <input style="display:none" name="contaminant" id="contaminant">
+                      <button onclick="recordcontaminant()" class="btn btn-outline-info">Submit</button><br><br>
+                      Thank you for helping improve water quality for everyone. We appreciate your help.
+                   </form>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div><br>
+    <p style="font-size:20px" align="middle">&copy; Quick Clean Water
+
+    <script type="text/javascript">
+        function recordpotability() {
+            var potability;
+            document.getElementById("phresult").value = document.getElementById("ph").value;
+            document.getElementById("turbidityresult").value = document.getElementById("turbidity").value;
+            document.getElementById("ctemperatureresult").value = document.getElementById("ctemperature").value;
+            document.getElementById("ftemperatureresult").value = document.getElementById("ftemperature").value;
+            document.getElementById("tdsresult").value = document.getElementById("tds").value;
+            document.getElementById("conductivityresult").value = document.getElementById("conductivity").value;
+            document.getElementById("salinityresult").value = document.getElementById("salinity").value;
+            if (document.getElementById("yes").checked) {
+                potability = "Yes";
+            }
+            else {
+                potability = "No";
+            }
+            document.getElementById("potability").value = potability;
+        };
+
+        function recordcontaminant() {
+            var odor;
+            var color;
+            var taste;
+            var contaminant;
+            //odor
+            if (document.getElementById("Algae-Like Earthy").checked) {
+                odor = "Algae-Like Earthy"
+            }
+            else if (document.getElementById("Chemical-Likeodor").checked) {
+                odor = "Chemical-Like"
+            }
+            else if (document.getElementById("Earthy/Dirt-Like").checked) {
+                odor = "Earthy/Dirt-Like"
+            }
+            else if (document.getElementById("Gasoline-Likeodor").checked) {
+                odor = "Gasoline-Like"
+            }
+            else if (document.getElementById("Metallicodor").checked) {
+                odor = "Metallic"
+            }
+            else if (document.getElementById("Rotton Sulfur-Likeodor").checked) {
+                odor = "Rotton Sulfur-Like"
+            }
+            else {
+                odor = "None"
+            }
+
+            //color
+            if (document.getElementById("Black").checked) {
+                color = "Black"
+            }
+            else if (document.getElementById("Blue").checked) {
+                color = "Blue"
+            }
+            else if (document.getElementById("Bronze").checked) {
+                color = "Bronze"
+            }
+            else if (document.getElementById("Brown").checked) {
+                color = "Brown"
+            }
+            else if (document.getElementById("Brown/Cloudy").checked) {
+                color = "Brown/Cloudy"
+            }
+            else if (document.getElementById("Cloudy").checked) {
+                color = "Cloudy"
+            }
+            else if (document.getElementById("Dark Brown").checked) {
+                color = "Dark Brown"
+            }
+            else if (document.getElementById("Gray").checked) {
+                color = "Gray"
+            }
+            else if (document.getElementById("Green").checked) {
+                color = "Green"
+            }
+            else if (document.getElementById("Orange").checked) {
+                color = "Orange"
+            }
+            else if (document.getElementById("Pink").checked) {
+                color = "Pink"
+            }
+            else if (document.getElementById("Rainbow/Colorful").checked) {
+                color = "Rainbow/Colorful"
+            }
+            else if (document.getElementById("Red").checked) {
+                color = "Red"
+            }
+            else if (document.getElementById("Reddish Brown").checked) {
+                color = "Reddish Brown"
+            }
+            else if (document.getElementById("White").checked) {
+                color = "White"
+            }
+            else if (document.getElementById("Yellow").checked) {
+                color = "Yellow"
+            }
+            else {
+                color = "None"
+            }
+
+            //taste
+            if (document.getElementById("Chemical-Like").checked) {
+                taste = "Chemical-Like"
+            }
+            else if (document.getElementById("Earthy/Sandy").checked) {
+                taste = "Earthy/Sandy"
+            }
+            else if (document.getElementById("Gasoline-Like").checked) {
+                taste = "Gasoline-Like"
+            }
+            else if (document.getElementById("Metallic").checked) {
+                taste = "Metallic"
+            }
+            else if (document.getElementById("Moldy Earthy").checked) {
+                taste = "Moldy Earthy"
+            }
+            else if (document.getElementById("Rotton Sulfur-Like").checked) {
+                taste = "Rotton Sulfur-Like"
+            }
+            else if (document.getElementById("Salty").checked) {
+                taste = "Salty"
+            }
+            else {
+                taste = "None"
+            }
+
+            //contaminant
+            if (document.getElementById("Algae").checked) {
+                contaminant = "Algae"
+            }
+            else if (document.getElementById("Ammonia").checked) {
+                contaminant = "Ammonia"
+            }
+            else if (document.getElementById("Arsenic").checked) {
+                contaminant = "Arsenic"
+            }
+            else if (document.getElementById("Clay, Silt, Sand").checked) {
+                contaminant = "Clay, Silt, Sand"
+            }
+            else if (document.getElementById("Bacteria").checked) {
+                contaminant = "Bacteria"
+            }
+            else if (document.getElementById("Copper").checked) {
+                contaminant = "Copper"
+            }
+            else if (document.getElementById("Disinfectants").checked) {
+                contaminant = "Disinfectants"
+            }
+            if (document.getElementById("Fluoride").checked) {
+                contaminant = "Fluoride"
+            }
+            else if (document.getElementById("Gasoline/Petrol").checked) {
+                contaminant = "Gasoline/Petrol"
+            }
+            else if (document.getElementById("Hydrogen Sulfide").checked) {
+                contaminant = "Hydrogen Sulfide"
+            }
+            else if (document.getElementById("Lead/Iron").checked) {
+                contaminant = "Lead/Iron"
+            }
+            else if (document.getElementById("Manganese").checked) {
+                contaminant = "Manganese"
+            }
+            else if (document.getElementById("Nitrates/Nitrites").checked) {
+                contaminant = "Nitrates/Nitrites"
+            }
+            else if (document.getElementById("Potassium Permanganate").checked) {
+                contaminant = "Potassium Permanganate"
+            }
+            else if (document.getElementById("Radioactive Elements").checked) {
+                contaminant = "Gasoline/Petrol"
+            }
+            else if (document.getElementById("Sodium").checked) {
+                contaminant = "Sodium"
+            }
+            else {
+                contaminant = "Zinc"
+            }
+
+            document.getElementById('odor').value = odor;
+            document.getElementById('color').value = color;
+            document.getElementById('taste').value = taste;
+            document.getElementById('contaminant').value = contaminant;
+        };
+
+
+    </script>
