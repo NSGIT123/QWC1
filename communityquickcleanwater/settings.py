@@ -77,13 +77,13 @@ WSGI_APPLICATION = 'communityquickcleanwater.wsgi.application'
 
 DATABASES = {
     'default': {
-        'default': 'Users',
+        'default': 'defaultdb',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'root',
         'PASSWORD': 'unicorn'
     },
-    'Community': {
-        'NAME': 'Community',
+    'community': {
+        'NAME': 'communitydb',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'root',
         'PASSWORD': 'unicorn'
