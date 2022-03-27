@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn import *
 import serial
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
@@ -204,7 +204,7 @@ def sign_up(request):
             user.username = email
             user.save()
             login(request, user)
-            return redirect('')
+            return redirect('/log-in/')
     return render(request, 'sign_up.html', {
         'form': form
     })
